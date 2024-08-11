@@ -136,8 +136,8 @@ if (isset($_POST['update'])) {
             </div>
             <div class="form-group">
                 <label for="image">Meal Image:</label><br>
-                <img src="../../Views/assets/img/meals/<?php echo $img; ?>" class="meal-image" alt="Meal Image">
-                <input type="file" id="image" name="image" class="form-control-file">
+                <img src="../../Views/assets/img/meals/<?php echo $img; ?>" id="meal-image-preview" class="meal-image" alt="Meal Image">
+                <input type="file" id="image" name="image" class="form-control-file" onchange="previewImage(event)">
             </div>
             <button type="submit" name="update" class="btn btn-primary">Update Meal</button>
         </form>
@@ -147,6 +147,18 @@ if (isset($_POST['update'])) {
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- JavaScript to Preview the Image -->
+    <script>
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function () {
+                const output = document.getElementById('meal-image-preview');
+                output.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
 </body>
 
 </html>

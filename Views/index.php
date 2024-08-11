@@ -3,28 +3,53 @@
 include '../Models/Config/config.php';
 include 'components/Modals.php';
 
+// Initialize the $imge variable
+$imge = '';
+
+$sql3 = "SELECT image FROM admin WHERE id = $id";
+$imgResult = $conn->query($sql3);
+
+if ($imgResult) {
+  if ($imgResult->num_rows > 0) {
+    while ($row = $imgResult->fetch_assoc()) {
+      // Check if 'image' key exists
+      if (isset($row["image"])) {
+        $imge = $row["image"];
+      } else {
+        echo "Key 'image' does not exist in the result.";
+      }
+    }
+  } else {
+    echo "No results found.";
+  }
+} else {
+  echo "Error: " . $conn->error;
+}
+
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
     <title>Dashboard - Quick Choice</title>
-    <link rel="icon" type="image/x-icon" href="../Views/assets/img/all/logo-menu.ico">
-    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-    <link href="css/styles.css" rel="stylesheet" />
+    <link href="assets/img/all/logo-menu.ico" rel="icon">
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
+
 
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-2" href="index.html"><img src="assets/img/all/logo-menu.ico" height="30" width="30" style="border-radius: 50%;" alt="">  Quick Choice Menu</a>
+        <a class="navbar-brand ps-2" href="index.php"><img src="assets/img/all/logo-menu.ico" height="30" width="30" style="border-radius: 50%;" alt="">  Quick Choice Menu</a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
                 class="fas fa-bars"></i></button>
@@ -41,10 +66,17 @@ include 'components/Modals.php';
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    aria-expanded="false"><img style="
+                     width: 40px;
+                     height: 40px;
+                     border-radius: 50%;
+                     float: left;
+                     border: 5px solid var(--menu-item-border);
+                     object-fit: cover;
+                     display: block;     " src="assets/img/profiles/<?php echo $imge;?>" ></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#!"><b><?php echo $_SESSION['username'] ?></b></a></li>
                     <li><a class="dropdown-item" href="../Models/edit/edit_profile.php">Settings</a></li>
-                    <li><a class="dropdown-item" href="#!">Activity Log</a></li>
                     <li>
                         <hr class="dropdown-divider" />
                     </li>
@@ -189,7 +221,16 @@ include 'components/Modals.php';
                                         <tr>
                                             <td>
                                                 <img src="assets/img/meals/<?php echo $img; ?>"
-                                                    style="height: 50px; border-radius: 40%;">
+                                                    style="
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  float: left;
+  border: 5px solid var(--menu-item-border);
+  object-fit: cover; 
+  display: block;     
+
+">
                                             </td>
                                             <td><?php echo $name; ?></td>
                                             <td><?php echo $description; ?></td>
@@ -229,7 +270,8 @@ include 'components/Modals.php';
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const qrLink = 'http://localhost/menu/Views/menuC/View/index.php?id=<?php echo $id; ?>';
+            // const qrLink = 'http://localhost/menu/Views/menuC/View/index.php?id=<?php echo $id; ?>';
+            const qrLink = 'http://192.168.1.13/menu1/Views/menuC/View/index.php?id=<?php echo $id; ?>';
             const qrcodeContainer = document.getElementById('qrcode');
             const qrLinkInput = document.getElementById('qr-link');
             const copyLinkBtn = document.getElementById('copy-link-btn');

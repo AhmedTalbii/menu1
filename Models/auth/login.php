@@ -14,6 +14,7 @@ if (isset($_POST['log_submit'])) {
         $row = $result->fetch_assoc();
         $_SESSION['id'] = $row['id'];
         $_SESSION['username'] = $row['username'];
+        $_SESSION['image'] = $row['image'];
 
         echo $_SESSION['id'];
         header('location:../../Views/index.php');

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : dim. 11 août 2024 à 10:46
+-- Généré le : dim. 11 août 2024 à 18:13
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -44,8 +44,8 @@ CREATE TABLE `admin` (
   `password` varchar(25) NOT NULL,
   `email` varchar(100) NOT NULL,
   `phone` varchar(25) NOT NULL,
-  `image` varchar(90) NOT NULL,
-  `couleur` varchar(55) NOT NULL,
+  `image` varchar(90) NOT NULL DEFAULT 'profil_admin.png',
+  `couleur` varchar(55) NOT NULL DEFAULT 'default',
   `Date_registration` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `activation_code` int(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -55,8 +55,9 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `username`, `password`, `email`, `phone`, `image`, `couleur`, `Date_registration`, `activation_code`) VALUES
-(1, 'ahmed', 'ahmed', 'd@gmail.com', '56156522', 'logo-menu.png', 'light-theme', '2024-08-11 08:11:43', 1234),
-(2, 'driss', 'driss', 'azd@gmail.com', '056505', 'banner-06.jpg', '', '2024-08-10 15:02:57', 1234);
+(1, 'ahmed', 'ahmed', 'd@gmail.com', '56156522', 'logo-menu.png', 'light-theme', '2024-08-11 14:48:20', 1234),
+(2, 'driss', 'drissX', 'driss@gmail.com', '056505', 'dkhalfao.jpg', 'light-theme', '2024-08-11 14:48:20', 1234),
+(3, 'admin', 'admin', 'admin@gmail.com', '0681005669', 'SID LOGO xs.png', 'light-theme', '2024-08-11 15:00:44', 1234);
 
 -- --------------------------------------------------------
 
@@ -79,7 +80,13 @@ INSERT INTO `categories` (`id`, `name`, `id_from_admin`) VALUES
 (2, 'Main Courses', 1),
 (3, 'Desserts', 1),
 (4, 'Beverages', 1),
-(5, 'Salads', 1);
+(5, 'Salads', 1),
+(10, 'salad', 2),
+(11, 'MEAT', 2),
+(13, 'HOTDOGS', 2),
+(14, 'BURGER', 2),
+(16, 'DRINK', 2),
+(17, 'PIZZA', 2);
 
 -- --------------------------------------------------------
 
@@ -111,7 +118,18 @@ INSERT INTO `meals` (`id`, `img`, `name`, `discretion`, `categorie`, `prix`, `id
 (7, 'https://via.placeholder.com/150', 'Steak', 'Grilled steak with garlic butter', 2, '18.99', 1),
 (8, 'https://via.placeholder.com/150', 'Cheesecake', 'Creamy cheesecake with a graham cracker crust', 3, '7.00', 1),
 (9, 'https://via.placeholder.com/150', 'Iced Coffee', 'Cold brew coffee served over ice', 4, '4.50', 104),
-(10, 'https://via.placeholder.com/150', 'Greek Salad', 'Tomatoes, cucumbers, and feta cheese', 5, '8.50', 105);
+(10, 'https://via.placeholder.com/150', 'Greek Salad', 'Tomatoes, cucumbers, and feta cheese', 5, '8.50', 105),
+(14, 'download.jpeg', 'Salad Fruit', 'best Salad Fruit', 10, '12', 2),
+(15, 'images.jpeg', 'Cured Meat', 'Best Cured Meat', 11, '25', 2),
+(16, 'images (1).jpeg', 'Corn Dog', 'Best Corn Dog.', 13, '18', 2),
+(17, 'images (2).jpeg', 'Chicago Dog', 'Best Chicago Dog', 13, '20', 2),
+(18, 'images (3).jpeg', 'Puka Dog', 'Best Puka Dog', 13, '24', 2),
+(19, 'images (4).jpeg', 'Sonoran Dog', 'Best Sonoran Dog', 13, '30', 2),
+(20, 'images (5).jpeg', 'Lamb Burger', 'Best Lamb Burger', 14, '30', 2),
+(21, 'urdaburger-FT-RECIPE0621-f8488fae404d4ae686d612a7bb201fe3.jpg', 'Specialty Burger', 'Best Specialty Burger', 14, '35', 2),
+(22, 'images (6).jpeg', 'Hawaii', 'hawaii Canetta', 16, '7', 2),
+(23, 'images (7).jpeg', 'Pepsi', 'Pepsi Canetta', 16, '7', 2),
+(24, 'pizza-romana-768x512-1.jpeg', 'Roman Pizza', 'Best Roman Pizza', 17, '35', 2);
 
 -- --------------------------------------------------------
 
@@ -132,7 +150,13 @@ CREATE TABLE `menu` (
 INSERT INTO `menu` (`id`, `ip`, `id_from_admin`) VALUES
 (5, '::1', 2),
 (6, '::1', 1),
-(7, '192.168.1.13', 1);
+(7, '192.168.1.13', 1),
+(8, '192.168.1.52', 2),
+(9, '192.168.1.5', 2),
+(10, '192.168.1.20', 2),
+(11, '192.168.1.6', 2),
+(12, '192.168.1.52', 3),
+(13, '::1', 3);
 
 --
 -- Index pour les tables déchargées
@@ -184,25 +208,25 @@ ALTER TABLE `activation_code`
 -- AUTO_INCREMENT pour la table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT pour la table `meals`
 --
 ALTER TABLE `meals`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT pour la table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Contraintes pour les tables déchargées

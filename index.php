@@ -53,7 +53,6 @@
             <?php } ?>
             <a href="Components/Forgot.php" class="Forgot_password">Forgot your password?</a>
             <button type="submit" name="log_submit" class="loginBtn">Sign In</button>
-            <a href="Components/Admin_Register.php" class="Forgot_password" style="font-size:10px">Don't have an account</a>
         </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

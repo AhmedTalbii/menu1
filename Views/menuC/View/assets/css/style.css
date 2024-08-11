@@ -195,10 +195,14 @@ section {
 
 .menu .menu-img {
   width: 70px;
+  height: 70px;
   border-radius: 50%;
   float: left;
   border: 5px solid var(--menu-item-border);
+  object-fit: cover;  /* Ensures the image covers the container without stretching */
+  display: block;     /* Ensures the image is treated as a block element */
 }
+
 
 .menu .menu-content {
   margin-left: 85px;
